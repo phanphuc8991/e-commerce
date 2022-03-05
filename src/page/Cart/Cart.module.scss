@@ -1,0 +1,174 @@
+.cart {
+  .header {
+    .wrapper {
+      position: fixed;
+      top: 0;
+      height: 90px;
+      width: 100%;
+      z-index: 3;
+      background-color: white;
+    }
+  }
+  .content {
+    margin-top: 120px;
+    .wrapper {
+      margin: 30px;
+      .title {
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 40px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        .btnContinue {
+          button {
+            padding: 10px 30px;
+            background-color: white;
+            font-weight: 500;
+            transition: all 0.6s ease;
+          }
+          button:hover {
+            cursor: pointer;
+            background-color: #f8f4f4;
+          }
+        }
+        .topTexts {
+          display: flex;
+          font-size: 16px;
+          font-weight: 500;
+          text-decoration: underline;
+          .topText {
+            margin-right: 15px;
+          }
+        }
+        .btnCheckout {
+          button {
+            padding: 10px 30px;
+            background-color: black;
+            font-weight: 500;
+            color: white;
+            outline: none;
+            border: none;
+            font-weight: 700;
+            transition: all 0.6s ease;
+          }
+          button:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      .bottom {
+        display: flex;
+
+        .info {
+          flex: 5;
+          .product {
+            display: flex;
+            padding-bottom: 10px;
+            border-bottom: 1px solid lightgray;
+            margin-right: 10px;
+            .detailProduct {
+              flex: 3;
+              display: flex;
+              .img {
+                width: 180px;
+                height: 180px;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
+              .descProduct {
+                margin: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .colorProduct {
+                  width: 20px;
+                  height: 20px;
+                  background-color: black;
+                  border-radius: 50%;
+                }
+              }
+            }
+            .priceDetail {
+              flex: 1;
+
+              margin: 40px;
+              .detailAmount {
+                margin-bottom: 20px;
+                display: flex;
+                .remove {
+                  width: 20px;
+                  height: 20px;
+                  cursor: pointer;
+                }
+                .amount {
+                  margin: 0 5px;
+                  width: 25px;
+                  height: 25px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-weight: 600;
+                  span {
+                    margin-top: 2px;
+                  }
+                }
+                .add {
+                  width: 20px;
+                  height: 20px;
+                  cursor: pointer;
+                }
+              }
+              .price {
+                font-size: 40px;
+                margin-left: 3px;
+              }
+            }
+          }
+        }
+        .summary {
+          flex: 2;
+
+          .summaryBorder {
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            .summaryWrapper {
+              font-size: 18px;
+
+              margin: 20px;
+              .summaryTitle {
+                font-size: 35px;
+                margin-bottom: 30px;
+              }
+              .summaryItem {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+              }
+              .btn {
+                button {
+                  width: 100%;
+                  background-color: black;
+                  color: white;
+                  padding: 10px 0;
+                  border: none;
+                  cursor: pointer;
+                  font-weight: 600;
+                }
+                padding-bottom: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

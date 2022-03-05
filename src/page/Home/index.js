@@ -1,11 +1,11 @@
 import styles from "./Home.module.scss";
-import Announcement from "../Announcement";
-import Navbar from "../Navbar";
-import Slider from "../Slider";
-import Category from "../Category";
-import Product from "../Product";
-import NewsLetter from "../NewsLetter";
-import Footer from "../Footer";
+import Announcement from "../../components/Announcement";
+import Navbar from "../../components/Navbar";
+import Slider from "../../components/Slider";
+import Category from "../../components/Category";
+import Product from "../../components/Product";
+import NewsLetter from "../../components/NewsLetter";
+import Footer from "../../components/Footer";
 function Home() {
   return (
     <div className={styles.home}>
