@@ -1,11 +1,31 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
 .container {
   margin: 20px;
+  margin-bottom: 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  @include respond(mobile) {
+    flex-direction: column;
+  }
 
   .left {
     flex: 1;
     margin-right: 50px;
+    @include respond(mobile) {
+      margin-right: 0px;
+    }
     .title {
       margin: 0;
       margin-bottom: 25px;
@@ -38,6 +58,9 @@
 
   .center {
     flex: 1;
+    @include respond(mobile) {
+      display: none;
+    }
     .title {
       margin: 0;
       margin-bottom: 25px;
@@ -57,6 +80,13 @@
 
   .right {
     flex: 1;
+    @include respond(mobile) {
+      margin-top: 10px;
+      background-color: #fff8f8;
+      padding: 20px 20px;
+      margin-left: -20px;
+      margin-right: -20px;
+    }
     .title {
       margin: 0;
       margin-bottom: 25px;

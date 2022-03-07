@@ -1,5 +1,22 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
 .category {
   display: flex;
   justify-content: space-between;
   margin: 20px 17px;
+  @include respond(mobile) {
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

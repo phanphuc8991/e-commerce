@@ -1,7 +1,20 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .newsLetter {
   height: 60vh;
   background-color: #fcf5f5;
-  margin-top: 15px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,11 +29,17 @@
     margin: 0;
     margin-top: 10px;
     margin-bottom: 20px;
+    @include respond(mobile) {
+      text-align: center;
+    }
   }
   .inputContainer {
     width: 50%;
     height: 40px;
     display: flex;
+    @include respond(mobile) {
+      width: 80%;
+    }
     input {
       flex: 8;
       border: 1px solid rgb(128, 128, 128, 0.1);

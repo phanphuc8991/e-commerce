@@ -1,13 +1,37 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .productList {
   .container {
     .title {
       margin: 20px;
+      font-size: 40px;
+      font-weight: bold;
     }
     .filterWrapper {
       display: flex;
       justify-content: space-between;
       margin: 20px;
+
       .filter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include respond(mobile) {
+          flex-direction: column;
+          justify-content: normal;
+          align-items: normal;
+        }
         .filterTitle {
           font-size: 20px;
           font-weight: 600;
@@ -18,7 +42,9 @@
           padding: 10px;
           margin-right: 20px;
           outline: none;
-          border-radius: none;
+          @include respond(mobile) {
+            margin: 10px 0;
+          }
         }
       }
     }

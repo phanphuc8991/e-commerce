@@ -47,7 +47,7 @@ function ProductList() {
           </div>
           <div className={styles.filter}>
             <span className={styles.filterTitle}> Sort Product: </span>
-            <select>
+            <select style={{ marginRight: "0" }}>
               <option selected disabled value="">
                 Newest
               </option>

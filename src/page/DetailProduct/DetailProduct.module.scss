@@ -1,3 +1,16 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .detailProduct {
   .header {
     .wrapper {
@@ -15,13 +28,24 @@
     margin-right: 50px;
     margin-top: 140px;
     margin-bottom: 20px;
-
+    @include respond(mobile) {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 100px;
+      margin-bottom: 20px;
+    }
     .wrapper {
       display: flex;
       justify-content: space-between;
       margin-bottom: 50px;
+      @include respond(mobile) {
+        flex-direction: column;
+      }
       .imgContainer {
         width: 90%;
+        @include respond(mobile) {
+          width: 100%;
+        }
         img {
           width: 100%;
           height: 100%;
@@ -30,9 +54,15 @@
       }
       .infoContainer {
         margin-left: 50px;
+        @include respond(mobile) {
+          margin-left: 0;
+        }
         .title {
           margin-top: 0;
           font-weight: 200;
+          @include respond(mobile) {
+            margin-top: 10px;
+          }
         }
         .desc {
         }
@@ -44,6 +74,9 @@
           justify-content: space-between;
           display: flex;
           margin-top: 40px;
+          @include respond(mobile) {
+            width: 100%;
+          }
           .filter {
             display: flex;
             align-items: center;
@@ -70,9 +103,13 @@
 
         .addContainer {
           width: 45%;
+          @include respond(mobile) {
+            width: 100%;
+          }
           justify-content: space-between;
           display: flex;
           margin-top: 40px;
+
           .amountContainer {
             display: flex;
             align-items: center;

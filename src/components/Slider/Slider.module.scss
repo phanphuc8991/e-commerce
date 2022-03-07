@@ -1,4 +1,20 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .slider {
+  @include respond(mobile) {
+    display: none;
+  }
   margin-top: 90px;
   .container {
     width: 100%;

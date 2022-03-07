@@ -1,3 +1,16 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .register {
   width: 100vw;
   height: 100vh;
@@ -16,13 +29,18 @@
   .content {
     max-width: 40%;
     background-color: white;
-
+    @include respond(mobile) {
+      max-width: 80%;
+    }
     .wrapper {
       margin: 20px;
       .title {
         font-size: 35px;
         font-weight: 300;
         margin: 0;
+        @include respond(mobile) {
+          font-size: 25px;
+        }
       }
       .inputContent {
         margin: 20px 0;
@@ -30,11 +48,21 @@
           display: flex;
           justify-content: space-between;
           margin-bottom: 20px;
+          @include respond(mobile) {
+            flex-direction: column;
+            margin-bottom: 0;
+          }
           input {
             padding: 10px;
             width: 42%;
+
             outline: none;
             border: 1px solid rgb(207, 205, 205, 0.8);
+            box-sizing: border-box;
+            @include respond(mobile) {
+              width: 100%;
+              margin-bottom: 10px;
+            }
           }
         }
       }
@@ -52,6 +80,10 @@
           color: white;
           font-weight: 500;
           transition: all 0.5s ease;
+          @include respond(mobile) {
+            width: 100%;
+            padding: 10px 0;
+          }
         }
         button:hover {
           cursor: pointer;

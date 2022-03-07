@@ -8,11 +8,6 @@ import Cart from "./page/Cart";
 function App() {
   return (
     <div className={styles.app}>
-      {/* <Home /> 
-      {/* <ProductList /> */}
-      {/* <DetailProduct /> */}
-      {/* <Login /> */}
-      {/* <Register /> */}
       <Cart />
     </div>
   );

@@ -1,7 +1,19 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .register {
   width: 100vw;
   height: 100vh;
-
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -16,6 +28,9 @@
   .content {
     max-width: 30%;
     background-color: white;
+    @include respond(mobile) {
+      max-width: 75%;
+    }
 
     .wrapper {
       margin: 20px;

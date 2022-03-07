@@ -1,3 +1,16 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 46.25em) and (max-width: 63.9375em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 46.1875em) {
+      @content;
+    } //900px
+  }
+}
+
 .navbar {
   .container {
     height: 60px;
@@ -5,12 +18,16 @@
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       .left {
-        flex: 1;
+        flex: 1.5;
         display: flex;
         align-items: center;
         .language {
           font-size: 14px;
+          @include respond(mobile) {
+            display: none;
+          }
         }
         .searchContainer {
           display: flex;
@@ -18,7 +35,15 @@
           padding: 5px;
           margin-left: 25px;
           align-items: center;
+          @include respond(mobile) {
+            margin-left: 0;
+
+            width: 100%;
+          }
           .searchInput {
+            @include respond(mobile) {
+              width: 100%;
+            }
             border: none;
             outline: none;
           }
@@ -35,6 +60,9 @@
         .logo {
           font-weight: bold;
           margin: 0;
+          @include respond(mobile) {
+            font-size: 24px;
+          }
         }
       }
       .right {
@@ -42,12 +70,31 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        @include respond(mobile) {
+          flex: 3;
+        }
         .menuItem {
           font-size: 14px;
           cursor: pointer;
           margin-left: 25px;
+          @include respond(mobile) {
+            margin-left: 10px;
+          }
         }
       }
     }
   }
 }
+
+// /* Tablet && Mobile*/
+// @media (max-width: 63.9375em) {
+//   .navbar {
+//     display: none;
+//   }
+// }
+// /* Tablet: width >= 740px and width < 1024px */
+// @media (min-width: 46.25em) and (max-width: 63.9375em) {
+// }
+// /* Mobile: width < 740px */
+// @media (max-width: 46.1875em) {
+// }

@@ -11,7 +11,7 @@ function Navbar() {
           <div className={styles.left}>
             <div className={styles.language}>EN</div>
             <div className={styles.searchContainer}>
-              <input className={styles.searchInput} />
+              <input className={styles.searchInput} placeholder="Search " />
               <SearchIcon className={styles.searchIcon} />
             </div>
           </div>
