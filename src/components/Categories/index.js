@@ -1,9 +1,9 @@
-import styles from "./Category.module.scss";
+import styles from "./Categories.module.scss";
 import CategoryItem from "../CategoryItem";
 import { categoryItems } from "../../constants";
-function Category() {
+function Categories() {
   return (
-    <div className={styles.category}>
+    <div className={styles.categories}>
       {categoryItems.map((category) => (
         <CategoryItem category={category} key={category.id} />
       ))}
@@ -11,4 +11,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default Categories;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./ProductItem.module.scss";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
@@ -7,7 +8,7 @@ function ProductItem({ product }) {
     <div className={styles.productItem}>
       <div className={styles.circle}></div>
       <div className={styles.image}>
-        <img src={require(`../../images/${product.img}`)} />
+        <img src={require(`../../images/${product.image}`)} />
         <div className={styles.info}>
           <div className={styles.circleItem}>
             <ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />
@@ -15,9 +16,11 @@ function ProductItem({ product }) {
           <div className={styles.circleItem}>
             <FavoriteBorderOutlinedIcon style={{ fontSize: "18px" }} />
           </div>
-          <div className={styles.circleItem}>
-            <SearchOutlinedIcon style={{ fontSize: "18px" }} />
-          </div>
+          <Link to={`/product/${product._id}`}>
+            <div className={styles.circleItem}>
+              <SearchOutlinedIcon style={{ fontSize: "18px" }} />
+            </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,11 +1,38 @@
+import { useEffect, useState } from "react";
 import styles from "./Cart.module.scss";
 import Announcement from "../../components/Announcement";
 import Navbar from "../../components/Navbar";
-import NewsLetter from "../../components/NewsLetter";
 import Footer from "../../components/Footer";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import cartApi from "../../api/cartApi";
+const STRIPE_KEY = process.env.REACT_APP_STRIPE_KEY;
 function Cart() {
+  const cart = useSelector((state) => state.cart.products);
+  const total = useSelector((state) => state.cart.total);
+  const [stripeToken, setTripeToken] = useState(null);
+
+  function onToken(token) {
+    setTripeToken(token);
+  }
+
+  useEffect(() => {
+    const createPayment = async () => {
+      const datePayment = {
+        tokenId: stripeToken.id,
+        amount: total * 100,
+      };
+      try {
+        const resPayment = await cartApi.createPayment(datePayment);
+        console.log("resPayment", resPayment);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    stripeToken && createPayment();
+  }, [stripeToken]);
   return (
     <div className={styles.cart}>
       <div className={styles.header}>
@@ -31,110 +58,50 @@ function Cart() {
           </div>
           <div className={styles.bottom}>
             <div className={styles.info}>
-              <div className={styles.product}>
-                <div className={styles.detailProduct}>
-                  <div className={styles.img}>
-                    <img src={require(`../../images/cart-2.png`)} />
-                  </div>
-                  <div className={styles.descProduct}>
-                    <div className={styles.nameProduct}>
-                      <b>Product:</b> JESSIE THUNDER SHOES
+              {cart.map((product) => (
+                <div key={product._id} className={styles.product}>
+                  <div className={styles.detailProduct}>
+                    <div className={styles.img}>
+                      <img
+                        alt=""
+                        src={require(`../../images/${product.image}`)}
+                      />
                     </div>
-                    <div className={styles.idProduct}>
-                      {" "}
-                      <b>ID:</b> 93813718293{" "}
-                    </div>
-                    <div className={styles.colorProduct}></div>
-                    <div className={styles.sizeProduct}>
-                      {" "}
-                      <b>Size:</b> 37.5
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.priceDetail}>
-                  <div className={styles.detailAmount}>
-                    <div className={styles.add}>
-                      <AddIcon />
-                    </div>
-                    <div className={styles.amount}>1</div>
-                    <div className={styles.remove}>
-                      <RemoveIcon />
+                    <div className={styles.descProduct}>
+                      <div className={styles.nameProduct}>
+                        <b>Product:</b> {product.title}
+                      </div>
+                      <div className={styles.idProduct}>
+                        {" "}
+                        <b>ID:</b> {product._id}
+                      </div>
+                      <div
+                        className={styles.colorProduct}
+                        style={{ backgroundColor: product.color }}
+                      ></div>
+                      <div className={styles.sizeProduct}>
+                        {" "}
+                        <b>Size:</b> {product.size}
+                      </div>
                     </div>
                   </div>
+                  <div className={styles.priceDetail}>
+                    <div className={styles.detailAmount}>
+                      <div className={styles.add}>
+                        <AddIcon />
+                      </div>
+                      <div className={styles.amount}>{product.quantity}</div>
+                      <div className={styles.remove}>
+                        <RemoveIcon />
+                      </div>
+                    </div>
 
-                  <div className={styles.price}>$ 20</div>
-                </div>
-              </div>
-
-              <div className={styles.product}>
-                <div className={styles.detailProduct}>
-                  <div className={styles.img}>
-                    <img src={require(`../../images/cart-1.png`)} />
-                  </div>
-                  <div className={styles.descProduct}>
-                    <div className={styles.nameProduct}>
-                      <b>Product:</b> JESSIE THUNDER SHOES
-                    </div>
-                    <div className={styles.idProduct}>
-                      {" "}
-                      <b>ID:</b> 93813718293{" "}
-                    </div>
-                    <div className={styles.colorProduct}></div>
-                    <div className={styles.sizeProduct}>
-                      {" "}
-                      <b>Size:</b> 37.5
+                    <div className={styles.price}>
+                      {product.quantity * product.price}
                     </div>
                   </div>
                 </div>
-                <div className={styles.priceDetail}>
-                  <div className={styles.detailAmount}>
-                    <div className={styles.add}>
-                      <AddIcon />
-                    </div>
-                    <div className={styles.amount}>1</div>
-                    <div className={styles.remove}>
-                      <RemoveIcon />
-                    </div>
-                  </div>
-
-                  <div className={styles.price}>$ 20</div>
-                </div>
-              </div>
-
-              <div className={styles.product}>
-                <div className={styles.detailProduct}>
-                  <div className={styles.img}>
-                    <img src={require(`../../images/cart-1.png`)} />
-                  </div>
-                  <div className={styles.descProduct}>
-                    <div className={styles.nameProduct}>
-                      <b>Product:</b> JESSIE THUNDER SHOES
-                    </div>
-                    <div className={styles.idProduct}>
-                      {" "}
-                      <b>ID:</b> 93813718293{" "}
-                    </div>
-                    <div className={styles.colorProduct}></div>
-                    <div className={styles.sizeProduct}>
-                      {" "}
-                      <b>Size:</b> 37.5
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.priceDetail}>
-                  <div className={styles.detailAmount}>
-                    <div className={styles.add}>
-                      <AddIcon />
-                    </div>
-                    <div className={styles.amount}>1</div>
-                    <div className={styles.remove}>
-                      <RemoveIcon />
-                    </div>
-                  </div>
-
-                  <div className={styles.price}>$ 20</div>
-                </div>
-              </div>
+              ))}
             </div>
             <div className={styles.summary}>
               <div className={styles.summaryBorder}>
@@ -165,17 +132,28 @@ function Cart() {
                     }}
                   >
                     <div className={styles.summaryItemText}>Total </div>
-                    <div className={styles.summaryItemPrice}>$ 80</div>
+                    <div className={styles.summaryItemPrice}>{total}</div>
                   </div>
-                  <div className={styles.btn}>
-                    <button>CHECKOUT NOW</button>
-                  </div>
+                  <StripeCheckout
+                    name="Shop"
+                    image="https://thao68.com/wp-content/uploads/2021/12/avatar-cute-6.jpg"
+                    shippingAddress
+                    billingAddress
+                    description={`Your total is ${total} `}
+                    amount={total * 100}
+                    token={onToken}
+                    stripeKey={STRIPE_KEY}
+                    className={styles.none}
+                  >
+                    <div className={styles.btn}>
+                      <button>CHECKOUT NOW</button>
+                    </div>
+                  </StripeCheckout>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <NewsLetter />
       </div>
       <div className={styles.footer}>
         <Footer />

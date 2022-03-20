@@ -2,8 +2,8 @@ import styles from "./Home.module.scss";
 import Announcement from "../../components/Announcement";
 import Navbar from "../../components/Navbar";
 import Slider from "../../components/Slider";
-import Category from "../../components/Category";
-import Product from "../../components/Product";
+import Categories from "../../components/Categories";
+import Products from "../../components/Products";
 import NewsLetter from "../../components/NewsLetter";
 import Footer from "../../components/Footer";
 function Home() {
@@ -15,10 +15,10 @@ function Home() {
           <Navbar />
         </div>
         <Slider />
-        <Category />
+        <Categories />
       </div>
       <div className={styles.content}>
-        <Product />
+        <Products />
         <NewsLetter />
       </div>
       <div className={styles.footer}>
