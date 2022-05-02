@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   const quantity = useSelector((state) => state.cart.quantity);
-  console.log("state.cart", quantity);
 
   return (
     <div className={styles.navbar}>

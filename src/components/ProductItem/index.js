@@ -8,7 +8,7 @@ function ProductItem({ product }) {
     <div className={styles.productItem}>
       <div className={styles.circle}></div>
       <div className={styles.image}>
-        <img src={require(`../../images/${product.image}`)} />
+        <img alt="no" src={product.image} />
         <div className={styles.info}>
           <div className={styles.circleItem}>
             <ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />

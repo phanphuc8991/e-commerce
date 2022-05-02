@@ -6,7 +6,7 @@ const productApi = {
   },
 
   get: (id) => {
-    const url = `/products/find/${id}`;
+    const url = `/products/${id}`;
 
     return axiosClient.get(url);
   },

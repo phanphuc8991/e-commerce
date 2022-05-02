@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 function CategoryItem({ category }) {
   return (
     <div className={styles.categoryItem}>
-      <Link to={`products/${category.category}`}>
+      <Link to={`products/${category.title}`}>
         <div className={styles.imageContainer}>
-          <img alt="" src={require(`../../images/${category.img}`)} />
+          <img alt="" src={category.image} />
         </div>
         <div className={styles.infoContainer}>
           <h1 className={styles.title}>{category.title}</h1>

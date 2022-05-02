@@ -8,11 +8,13 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import { useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import cartApi from "../../api/cartApi";
+import { useNavigate } from "react-router-dom";
 const STRIPE_KEY = process.env.REACT_APP_STRIPE_KEY;
 function Cart() {
-  const cart = useSelector((state) => state.cart.products);
-  const total = useSelector((state) => state.cart.total);
+  const cart = useSelector((state) => state.cart);
+
   const [stripeToken, setTripeToken] = useState(null);
+  const navigate = useNavigate();
 
   function onToken(token) {
     setTripeToken(token);
@@ -22,11 +24,16 @@ function Cart() {
     const createPayment = async () => {
       const datePayment = {
         tokenId: stripeToken.id,
-        amount: total * 100,
+        amount: cart.total * 100,
       };
       try {
         const resPayment = await cartApi.createPayment(datePayment);
-        console.log("resPayment", resPayment);
+
+        const state = {
+          cart,
+          stripeData: resPayment,
+        };
+        navigate("/success", { state });
       } catch (error) {
         console.log(error);
       }
@@ -58,14 +65,11 @@ function Cart() {
           </div>
           <div className={styles.bottom}>
             <div className={styles.info}>
-              {cart.map((product) => (
+              {cart.products.map((product) => (
                 <div key={product._id} className={styles.product}>
                   <div className={styles.detailProduct}>
                     <div className={styles.img}>
-                      <img
-                        alt=""
-                        src={require(`../../images/${product.image}`)}
-                      />
+                      <img alt="" src={product.image} />
                     </div>
                     <div className={styles.descProduct}>
                       <div className={styles.nameProduct}>
@@ -132,15 +136,15 @@ function Cart() {
                     }}
                   >
                     <div className={styles.summaryItemText}>Total </div>
-                    <div className={styles.summaryItemPrice}>{total}</div>
+                    <div className={styles.summaryItemPrice}>{cart.total}</div>
                   </div>
                   <StripeCheckout
                     name="Shop"
                     image="https://thao68.com/wp-content/uploads/2021/12/avatar-cute-6.jpg"
                     shippingAddress
                     billingAddress
-                    description={`Your total is ${total} `}
-                    amount={total * 100}
+                    description={`Your total is ${cart.total} `}
+                    amount={cart.total * 100}
                     token={onToken}
                     stripeKey={STRIPE_KEY}
                     className={styles.none}

@@ -8,10 +8,10 @@ import Cart from "./page/Cart";
 import Success from "./page/Success";
 import Pay from "./page/Pay";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 function App() {
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user);
 
   return (
     <div className={styles.app}>
@@ -31,6 +31,7 @@ function App() {
             path="/register"
             element={user ? <Navigate to="/" /> : <Register />}
           />
+          <Route exact path="/success" element={<Success />} />
         </Routes>
       </BrowserRouter>
     </div>
